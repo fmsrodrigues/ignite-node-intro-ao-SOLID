@@ -1,0 +1,352 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Documentation",
+    "description": "This is a rocketseat ignite challenge API documentation",
+    "version": "1.0.0",
+    "contact": {
+      "email": "test@test.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "email": "johndoe@test.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "123",
+                    "name": "John Doe",
+                    "email": "johndoe@test.com",
+                    "admin": false,
+                    "created_at": "1/1/1900",
+                    "updated_at": "1/1/1900"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "E-mail in use."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List all users",
+        "description": "List all users if the request was sent by and admin user",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "Id of the user that is sending the request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "ccb49fa3-05ba-4739-9f36-f1bcf2fb6883"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "id": "123",
+                        "name": "John Doe",
+                        "email": "johndoe@test.com",
+                        "admin": false,
+                        "created_at": "1/1/1900",
+                        "updated_at": "1/1/1900"
+                      },
+                      {
+                        "id": "456",
+                        "name": "John Dos",
+                        "email": "johndos@test.com",
+                        "admin": true,
+                        "created_at": "1/1/1900",
+                        "updated_at": "1/1/1900"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "You don't have permission to do that."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Gets a user",
+        "description": "Gets information from a user",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "Id of the user that is sending the request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "ccb49fa3-05ba-4739-9f36-f1bcf2fb6883"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "123",
+                    "name": "John Doe",
+                    "email": "johndoe@test.com",
+                    "admin": false,
+                    "created_at": "1/1/1900",
+                    "updated_at": "1/1/1900"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Turns user into an admin",
+        "description": "Gets an user and grant him the admin postion",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "Id of the user that is sending the request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "ccb49fa3-05ba-4739-9f36-f1bcf2fb6883"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "123",
+                    "name": "John Doe",
+                    "email": "johndoe@test.com",
+                    "admin": true,
+                    "created_at": "1/1/1900",
+                    "updated_at": "10/10/2000"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
